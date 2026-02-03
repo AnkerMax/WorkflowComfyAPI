@@ -1,0 +1,454 @@
+{
+  "117": {
+    "inputs": {
+      "text": "Write everything you want to see in the image HERE in this TEXTBOX in complete English sentences. The more detailed, the better the result. Avoid mentioning specific real places and people.",
+      "clip": [
+        "124:103:22",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "Positiv Prompt powered by Open-Telekom-Cloud.com"
+    }
+  },
+  "118": {
+    "inputs": {
+      "text": "Write down all the English keywords you do NOT want in the image HERE in this TEXTBOX. The keywords do not need to be negated. Example input: red, blue, text -> excludes the colors red and blue as well as text from the image",
+      "clip": [
+        "124:103:22",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "Negativ Prompt powered by Open-Telekom-Cloud.com"
+    }
+  },
+  "124:103:8": {
+    "inputs": {
+      "vae_name": "wan_2.1_vae.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "Load VAE"
+    }
+  },
+  "124:103:22": {
+    "inputs": {
+      "clip_name": "umt5_xxl_fp16.safetensors",
+      "type": "wan",
+      "device": "default"
+    },
+    "class_type": "CLIPLoader",
+    "_meta": {
+      "title": "Load CLIP"
+    }
+  },
+  "124:103:47": {
+    "inputs": {
+      "unet_name": "Wan2.2/wan2.2_t2v_low_noise_14B_fp16.safetensors",
+      "weight_dtype": "default"
+    },
+    "class_type": "UNETLoader",
+    "_meta": {
+      "title": "Load Diffusion Model"
+    }
+  },
+  "124:103:53": {
+    "inputs": {
+      "sage_attention": "auto",
+      "model": [
+        "124:103:47",
+        0
+      ]
+    },
+    "class_type": "PathchSageAttentionKJ",
+    "_meta": {
+      "title": "Patch Sage Attention KJ"
+    }
+  },
+  "124:123:120": {
+    "inputs": {
+      "add_noise": "enable",
+      "noise_seed": 111043712465799,
+      "steps": 40,
+      "cfg": 1.3,
+      "sampler_name": "res_2s",
+      "scheduler": "beta57",
+      "start_at_step": 0,
+      "end_at_step": 40,
+      "return_with_leftover_noise": "disable",
+      "model": [
+        "124:103:53",
+        0
+      ],
+      "positive": [
+        "117",
+        0
+      ],
+      "negative": [
+        "118",
+        0
+      ],
+      "latent_image": [
+        "124:123:121",
+        0
+      ]
+    },
+    "class_type": "KSamplerAdvanced",
+    "_meta": {
+      "title": "KSampler (Advanced)"
+    }
+  },
+  "124:123:122": {
+    "inputs": {
+      "model_name": "RealESRGAN_x4plus.pth"
+    },
+    "class_type": "UpscaleModelLoader",
+    "_meta": {
+      "title": "Load Upscale Model"
+    }
+  },
+  "124:123:121": {
+    "inputs": {
+      "width": 1920,
+      "height": 1088,
+      "length": 1,
+      "batch_size": 1
+    },
+    "class_type": "EmptyHunyuanLatentVideo",
+    "_meta": {
+      "title": "EmptyHunyuanLatentVideo"
+    }
+  },
+  "124:123:119": {
+    "inputs": {
+      "upscale_by": 2,
+      "seed": 1059725758343231,
+      "steps": 10,
+      "cfg": 2.5,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "denoise": 0.20000000000000004,
+      "mode_type": "Linear",
+      "tile_width": 1024,
+      "tile_height": 1024,
+      "mask_blur": 10,
+      "tile_padding": 32,
+      "seam_fix_mode": "None",
+      "seam_fix_denoise": 1,
+      "seam_fix_width": 64,
+      "seam_fix_mask_blur": 8,
+      "seam_fix_padding": 16,
+      "force_uniform_tiles": true,
+      "tiled_decode": false,
+      "image": [
+        "124:106:9",
+        0
+      ],
+      "model": [
+        "124:103:53",
+        0
+      ],
+      "positive": [
+        "117",
+        0
+      ],
+      "negative": [
+        "118",
+        0
+      ],
+      "vae": [
+        "124:103:8",
+        0
+      ],
+      "upscale_model": [
+        "124:123:122",
+        0
+      ]
+    },
+    "class_type": "UltimateSDUpscale",
+    "_meta": {
+      "title": "Ultimate SD Upscale"
+    }
+  },
+  "124:106:101": {
+    "inputs": {
+      "rgthree_comparer": {
+        "images": [
+          {
+            "name": "A",
+            "selected": true,
+            "url": "/api/view?filename=rgthree.compare._temp_zpxbp_00095_.png&type=temp&subfolder=&rand=0.1868815213327496"
+          },
+          {
+            "name": "B",
+            "selected": true,
+            "url": "/api/view?filename=rgthree.compare._temp_zpxbp_00096_.png&type=temp&subfolder=&rand=0.3444009547336867"
+          }
+        ]
+      },
+      "image_a": [
+        "124:106:9",
+        0
+      ],
+      "image_b": [
+        "124:123:119",
+        0
+      ]
+    },
+    "class_type": "Image Comparer (rgthree)",
+    "_meta": {
+      "title": "Image Comparer (rgthree)"
+    }
+  },
+  "124:106:9": {
+    "inputs": {
+      "samples": [
+        "124:123:120",
+        0
+      ],
+      "vae": [
+        "124:103:8",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "124:106:68": {
+    "inputs": {
+      "images": [
+        "124:106:9",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "124:99": {
+    "inputs": {
+      "filename_prefix": "ComfyUI",
+      "images": [
+        "124:123:119",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "Save Image"
+    }
+  },
+  "_comfyuimini_meta": {
+    "title": "Simple 4K-Image Generator",
+    "description": "Provide a Prompt to generate a 4K-Image hosted on T Cloud Public",
+    "format_version": "2",
+    "input_options": [
+      {
+        "node_id": "117",
+        "input_name_in_node": "text",
+        "title": "Positiv Prompt powered by T Cloud Public:"
+      },
+      {
+        "node_id": "118",
+        "input_name_in_node": "text",
+        "title": "Negativ Prompt powered by T Cloud Public:"
+      },
+      {
+        "node_id": "124:103:8",
+        "input_name_in_node": "vae_name",
+        "disabled": true
+      },
+      {
+        "node_id": "124:103:22",
+        "input_name_in_node": "clip_name",
+        "disabled": true
+      },
+      {
+        "node_id": "124:103:22",
+        "input_name_in_node": "type",
+        "disabled": true
+      },
+      {
+        "node_id": "124:103:22",
+        "input_name_in_node": "device",
+        "disabled": true
+      },
+      {
+        "node_id": "124:103:47",
+        "input_name_in_node": "unet_name",
+        "disabled": true
+      },
+      {
+        "node_id": "124:103:47",
+        "input_name_in_node": "weight_dtype",
+        "disabled": true
+      },
+      {
+        "node_id": "124:103:53",
+        "input_name_in_node": "sage_attention",
+        "disabled": true
+      },
+      {
+        "node_id": "124:123:120",
+        "input_name_in_node": "add_noise",
+        "disabled": true
+      },
+      {
+        "node_id": "124:123:120",
+        "input_name_in_node": "noise_seed",
+        "disabled": true
+      },
+      {
+        "node_id": "124:123:120",
+        "input_name_in_node": "steps",
+        "disabled": true
+      },
+      {
+        "node_id": "124:123:120",
+        "input_name_in_node": "cfg",
+        "disabled": true
+      },
+      {
+        "node_id": "124:123:120",
+        "input_name_in_node": "sampler_name",
+        "disabled": true
+      },
+      {
+        "node_id": "124:123:120",
+        "input_name_in_node": "scheduler",
+        "disabled": true
+      },
+      {
+        "node_id": "124:123:120",
+        "input_name_in_node": "start_at_step",
+        "disabled": true
+      },
+      {
+        "node_id": "124:123:120",
+        "input_name_in_node": "end_at_step",
+        "disabled": true
+      },
+      {
+        "node_id": "124:123:120",
+        "input_name_in_node": "return_with_leftover_noise",
+        "disabled": true
+      },
+      {
+        "node_id": "124:123:121",
+        "input_name_in_node": "width",
+        "disabled": true
+      },
+      {
+        "node_id": "124:123:121",
+        "input_name_in_node": "height",
+        "disabled": true
+      },
+      {
+        "node_id": "124:123:121",
+        "input_name_in_node": "length",
+        "disabled": true
+      },
+      {
+        "node_id": "124:123:121",
+        "input_name_in_node": "batch_size",
+        "disabled": true
+      },
+      {
+        "node_id": "124:123:119",
+        "input_name_in_node": "upscale_by",
+        "disabled": true
+      },
+      {
+        "node_id": "124:123:119",
+        "input_name_in_node": "seed",
+        "disabled": true
+      },
+      {
+        "node_id": "124:123:119",
+        "input_name_in_node": "steps",
+        "disabled": true
+      },
+      {
+        "node_id": "124:123:119",
+        "input_name_in_node": "cfg",
+        "disabled": true
+      },
+      {
+        "node_id": "124:123:119",
+        "input_name_in_node": "sampler_name",
+        "disabled": true
+      },
+      {
+        "node_id": "124:123:119",
+        "input_name_in_node": "scheduler",
+        "disabled": true
+      },
+      {
+        "node_id": "124:123:119",
+        "input_name_in_node": "denoise",
+        "disabled": true
+      },
+      {
+        "node_id": "124:123:119",
+        "input_name_in_node": "mode_type",
+        "disabled": true
+      },
+      {
+        "node_id": "124:123:119",
+        "input_name_in_node": "tile_width",
+        "disabled": true
+      },
+      {
+        "node_id": "124:123:119",
+        "input_name_in_node": "tile_height",
+        "disabled": true
+      },
+      {
+        "node_id": "124:123:119",
+        "input_name_in_node": "mask_blur",
+        "disabled": true
+      },
+      {
+        "node_id": "124:123:119",
+        "input_name_in_node": "tile_padding",
+        "disabled": true
+      },
+      {
+        "node_id": "124:123:119",
+        "input_name_in_node": "seam_fix_mode",
+        "disabled": true
+      },
+      {
+        "node_id": "124:123:119",
+        "input_name_in_node": "seam_fix_denoise",
+        "disabled": true
+      },
+      {
+        "node_id": "124:123:119",
+        "input_name_in_node": "seam_fix_width",
+        "disabled": true
+      },
+      {
+        "node_id": "124:123:119",
+        "input_name_in_node": "seam_fix_mask_blur",
+        "disabled": true
+      },
+      {
+        "node_id": "124:123:119",
+        "input_name_in_node": "seam_fix_padding",
+        "disabled": true
+      },
+      {
+        "node_id": "124:99",
+        "input_name_in_node": "filename_prefix",
+        "disabled": true
+      }
+    ]
+  }
+}

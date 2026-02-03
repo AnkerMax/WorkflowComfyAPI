@@ -1,0 +1,689 @@
+{
+  "28": {
+    "inputs": {
+      "text": "Write everything you want to see in the video here in complete English sentences. The more detailed, the better the result. Avoid mentioning specific real places and people."
+    },
+    "class_type": "JjkText",
+    "_meta": {
+      "title": "Positiv Prompt powered by Open-Telekom-Cloud.com"
+    }
+  },
+  "29": {
+    "inputs": {
+      "text": "Write down all the English keywords you do NOT want in the video here. The keywords do not need to be negated. Example input: red, blue, text -> excludes the colors red and blue as well as text from the image"
+    },
+    "class_type": "JjkText",
+    "_meta": {
+      "title": "Negativ Prompt powered by Open-Telekom-Cloud.com"
+    }
+  },
+  "117:98:86": {
+    "inputs": {
+      "sage_attention": "auto",
+      "model": [
+        "117:98:88",
+        0
+      ]
+    },
+    "class_type": "PathchSageAttentionKJ",
+    "_meta": {
+      "title": "Patch Sage Attention KJ"
+    }
+  },
+  "117:98:87": {
+    "inputs": {
+      "aggressive": false,
+      "model": [
+        "117:98:88",
+        0
+      ]
+    },
+    "class_type": "FreeMemoryModel",
+    "_meta": {
+      "title": "Free Memory (Model)"
+    }
+  },
+  "117:98:88": {
+    "inputs": {
+      "PowerLoraLoaderHeaderWidget": {
+        "type": "PowerLoraLoaderHeaderWidget"
+      },
+      "lora_1": {
+        "on": true,
+        "lora": "Wan2.2-Lightning_T2V-A14B-4steps-lora_LOW_fp16.safetensors",
+        "strength": 1
+      },
+      "lora_2": {
+        "on": false,
+        "lora": "None",
+        "strength": 0
+      },
+      "lora_3": {
+        "on": false,
+        "lora": "None",
+        "strength": 0
+      },
+      "➕ Add Lora": "",
+      "model": [
+        "117:98:89",
+        0
+      ],
+      "clip": [
+        "117:98:3",
+        0
+      ]
+    },
+    "class_type": "Power Lora Loader (rgthree)",
+    "_meta": {
+      "title": "Power Lora Loader (rgthree)"
+    }
+  },
+  "117:98:89": {
+    "inputs": {
+      "shift": 8.000000000000002,
+      "model": [
+        "117:98:90",
+        0
+      ]
+    },
+    "class_type": "ModelSamplingSD3",
+    "_meta": {
+      "title": "ModelSamplingSD3"
+    }
+  },
+  "117:98:90": {
+    "inputs": {
+      "unet_name": "Wan2.2/wan2.2_t2v_low_noise_14B_fp16.safetensors",
+      "weight_dtype": "default"
+    },
+    "class_type": "UNETLoader",
+    "_meta": {
+      "title": "Load Diffusion Model"
+    }
+  },
+  "117:98:91": {
+    "inputs": {
+      "unet_name": "Wan2.2/wan2.2_t2v_high_noise_14B_fp16.safetensors",
+      "weight_dtype": "default"
+    },
+    "class_type": "UNETLoader",
+    "_meta": {
+      "title": "Load Diffusion Model"
+    }
+  },
+  "117:98:92": {
+    "inputs": {
+      "shift": 8.000000000000002,
+      "model": [
+        "117:98:91",
+        0
+      ]
+    },
+    "class_type": "ModelSamplingSD3",
+    "_meta": {
+      "title": "ModelSamplingSD3"
+    }
+  },
+  "117:98:93": {
+    "inputs": {
+      "PowerLoraLoaderHeaderWidget": {
+        "type": "PowerLoraLoaderHeaderWidget"
+      },
+      "lora_1": {
+        "on": true,
+        "lora": "Wan2.2-Lightning_T2V-A14B-4steps-lora_HIGH_fp16.safetensors",
+        "strength": 1
+      },
+      "lora_2": {
+        "on": false,
+        "lora": "None",
+        "strength": 0
+      },
+      "lora_3": {
+        "on": false,
+        "lora": "None",
+        "strength": 0
+      },
+      "➕ Add Lora": "",
+      "model": [
+        "117:98:92",
+        0
+      ],
+      "clip": [
+        "117:98:3",
+        0
+      ]
+    },
+    "class_type": "Power Lora Loader (rgthree)",
+    "_meta": {
+      "title": "Power Lora Loader (rgthree)"
+    }
+  },
+  "117:98:94": {
+    "inputs": {
+      "aggressive": false,
+      "image": [
+        "117:116:112",
+        0
+      ]
+    },
+    "class_type": "FreeMemoryImage",
+    "_meta": {
+      "title": "Free Memory (Image)"
+    }
+  },
+  "117:98:95": {
+    "inputs": {
+      "aggressive": false,
+      "model": [
+        "117:98:93",
+        0
+      ]
+    },
+    "class_type": "FreeMemoryModel",
+    "_meta": {
+      "title": "Free Memory (Model)"
+    }
+  },
+  "117:98:96": {
+    "inputs": {
+      "sage_attention": "auto",
+      "model": [
+        "117:98:93",
+        0
+      ]
+    },
+    "class_type": "PathchSageAttentionKJ",
+    "_meta": {
+      "title": "Patch Sage Attention KJ"
+    }
+  },
+  "117:98:3": {
+    "inputs": {
+      "clip_name": "umt5_xxl_fp8_e4m3fn_scaled.safetensors",
+      "type": "wan",
+      "device": "default"
+    },
+    "class_type": "CLIPLoader",
+    "_meta": {
+      "title": "Load CLIP"
+    }
+  },
+  "117:98:97": {
+    "inputs": {
+      "enable_fp16_accumulation": false,
+      "model": [
+        "117:98:96",
+        0
+      ]
+    },
+    "class_type": "ModelPatchTorchSettings",
+    "_meta": {
+      "title": "Model Patch Torch Settings"
+    }
+  },
+  "117:98:85": {
+    "inputs": {
+      "enable_fp16_accumulation": false,
+      "model": [
+        "117:98:86",
+        0
+      ]
+    },
+    "class_type": "ModelPatchTorchSettings",
+    "_meta": {
+      "title": "Model Patch Torch Settings"
+    }
+  },
+  "117:116:103": {
+    "inputs": {
+      "aggressive": false,
+      "latent": [
+        "117:116:104",
+        0
+      ]
+    },
+    "class_type": "FreeMemoryLatent",
+    "_meta": {
+      "title": "Free Memory (Latent)"
+    }
+  },
+  "117:116:104": {
+    "inputs": {
+      "add_noise": "disable",
+      "noise_seed": 384311111714218,
+      "steps": 4,
+      "cfg": 1,
+      "sampler_name": "ddim",
+      "scheduler": "beta",
+      "start_at_step": 2,
+      "end_at_step": 10000,
+      "return_with_leftover_noise": "disable",
+      "model": [
+        "117:98:85",
+        0
+      ],
+      "positive": [
+        "117:116:110",
+        0
+      ],
+      "negative": [
+        "117:116:109",
+        0
+      ],
+      "latent_image": [
+        "117:116:105",
+        0
+      ]
+    },
+    "class_type": "KSamplerAdvanced",
+    "_meta": {
+      "title": "KSampler (Advanced)"
+    }
+  },
+  "117:116:105": {
+    "inputs": {
+      "aggressive": false,
+      "latent": [
+        "117:116:106",
+        0
+      ]
+    },
+    "class_type": "FreeMemoryLatent",
+    "_meta": {
+      "title": "Free Memory (Latent)"
+    }
+  },
+  "117:116:106": {
+    "inputs": {
+      "add_noise": "enable",
+      "noise_seed": 970765159770330,
+      "steps": 4,
+      "cfg": 1,
+      "sampler_name": "ddim",
+      "scheduler": "beta",
+      "start_at_step": 0,
+      "end_at_step": 2,
+      "return_with_leftover_noise": "enable",
+      "model": [
+        "117:98:97",
+        0
+      ],
+      "positive": [
+        "117:116:108",
+        0
+      ],
+      "negative": [
+        "117:116:107",
+        0
+      ],
+      "latent_image": [
+        "117:5",
+        0
+      ]
+    },
+    "class_type": "KSamplerAdvanced",
+    "_meta": {
+      "title": "KSampler (Advanced)"
+    }
+  },
+  "117:116:107": {
+    "inputs": {
+      "text": [
+        "29",
+        0
+      ],
+      "clip": [
+        "117:98:93",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "117:116:108": {
+    "inputs": {
+      "text": [
+        "28",
+        0
+      ],
+      "clip": [
+        "117:98:93",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "117:116:109": {
+    "inputs": {
+      "text": [
+        "29",
+        0
+      ],
+      "clip": [
+        "117:98:88",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "117:116:110": {
+    "inputs": {
+      "text": [
+        "28",
+        0
+      ],
+      "clip": [
+        "117:98:88",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "117:116:111": {
+    "inputs": {
+      "vae_name": "wan_2.1_vae.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "Load VAE"
+    }
+  },
+  "117:116:112": {
+    "inputs": {
+      "samples": [
+        "117:116:103",
+        0
+      ],
+      "vae": [
+        "117:116:111",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "117:116:101": {
+    "inputs": {
+      "frame_rate": 24,
+      "loop_count": 0,
+      "filename_prefix": "AnimateDiff",
+      "format": "video/h264-mp4",
+      "pix_fmt": "yuv420p",
+      "crf": 19,
+      "save_metadata": true,
+      "trim_to_audio": false,
+      "pingpong": false,
+      "save_output": true,
+      "images": [
+        "117:98:94",
+        0
+      ]
+    },
+    "class_type": "VHS_VideoCombine",
+    "_meta": {
+      "title": "Video Combine 🎥🅥🅗🅢"
+    }
+  },
+  "117:116:102": {
+    "inputs": {
+      "megapixel": "2.0",
+      "aspect_ratio": "16:9 (Panorama)",
+      "divisible_by": "64",
+      "custom_ratio": false,
+      "custom_aspect_ratio": "1:1"
+    },
+    "class_type": "FluxResolutionNode",
+    "_meta": {
+      "title": "Flux Resolution Calc"
+    }
+  },
+  "117:5": {
+    "inputs": {
+      "width": [
+        "117:116:102",
+        0
+      ],
+      "height": [
+        "117:116:102",
+        1
+      ],
+      "length": 121,
+      "batch_size": 1
+    },
+    "class_type": "EmptyHunyuanLatentVideo",
+    "_meta": {
+      "title": "(length-1)/24 = Videolänge in Sekunden"
+    }
+  },
+  "_comfyuimini_meta": {
+    "title": "Simple Video Generator",
+    "description": "Provide a Prompt to generate a 720p short Video (5s length) hosted on T Cloud Public",
+    "format_version": "2",
+    "input_options": [
+      {
+        "node_id": "28",
+        "input_name_in_node": "text",
+        "title": "Positiv Prompt powered by T Cloud Public:"
+      },
+      {
+        "node_id": "29",
+        "input_name_in_node": "text",
+        "title": "Negativ Prompt powered by T Cloud Public:"
+      },
+      {
+        "node_id": "117:98:86",
+        "input_name_in_node": "sage_attention",
+        "disabled": true
+      },
+      {
+        "node_id": "117:98:89",
+        "input_name_in_node": "shift",
+        "disabled": true
+      },
+      {
+        "node_id": "117:98:90",
+        "input_name_in_node": "unet_name",
+        "disabled": true
+      },
+      {
+        "node_id": "117:98:90",
+        "input_name_in_node": "weight_dtype",
+        "disabled": true
+      },
+      {
+        "node_id": "117:98:91",
+        "input_name_in_node": "unet_name",
+        "disabled": true
+      },
+      {
+        "node_id": "117:98:91",
+        "input_name_in_node": "weight_dtype",
+        "disabled": true
+      },
+      {
+        "node_id": "117:98:92",
+        "input_name_in_node": "shift",
+        "disabled": true
+      },
+      {
+        "node_id": "117:98:96",
+        "input_name_in_node": "sage_attention",
+        "disabled": true
+      },
+      {
+        "node_id": "117:98:3",
+        "input_name_in_node": "clip_name",
+        "disabled": true
+      },
+      {
+        "node_id": "117:98:3",
+        "input_name_in_node": "type",
+        "disabled": true
+      },
+      {
+        "node_id": "117:98:3",
+        "input_name_in_node": "device",
+        "disabled": true
+      },
+      {
+        "node_id": "117:116:104",
+        "input_name_in_node": "add_noise",
+        "disabled": true
+      },
+      {
+        "node_id": "117:116:104",
+        "input_name_in_node": "noise_seed",
+        "disabled": true
+      },
+      {
+        "node_id": "117:116:104",
+        "input_name_in_node": "steps",
+        "disabled": true
+      },
+      {
+        "node_id": "117:116:104",
+        "input_name_in_node": "cfg",
+        "disabled": true
+      },
+      {
+        "node_id": "117:116:104",
+        "input_name_in_node": "sampler_name",
+        "disabled": true
+      },
+      {
+        "node_id": "117:116:104",
+        "input_name_in_node": "scheduler",
+        "disabled": true
+      },
+      {
+        "node_id": "117:116:104",
+        "input_name_in_node": "start_at_step",
+        "disabled": true
+      },
+      {
+        "node_id": "117:116:104",
+        "input_name_in_node": "end_at_step",
+        "disabled": true
+      },
+      {
+        "node_id": "117:116:104",
+        "input_name_in_node": "return_with_leftover_noise",
+        "disabled": true
+      },
+      {
+        "node_id": "117:116:106",
+        "input_name_in_node": "add_noise",
+        "disabled": true
+      },
+      {
+        "node_id": "117:116:106",
+        "input_name_in_node": "noise_seed",
+        "disabled": true
+      },
+      {
+        "node_id": "117:116:106",
+        "input_name_in_node": "steps",
+        "disabled": true
+      },
+      {
+        "node_id": "117:116:106",
+        "input_name_in_node": "cfg",
+        "disabled": true
+      },
+      {
+        "node_id": "117:116:106",
+        "input_name_in_node": "sampler_name",
+        "disabled": true
+      },
+      {
+        "node_id": "117:116:106",
+        "input_name_in_node": "scheduler",
+        "disabled": true
+      },
+      {
+        "node_id": "117:116:106",
+        "input_name_in_node": "start_at_step",
+        "disabled": true
+      },
+      {
+        "node_id": "117:116:106",
+        "input_name_in_node": "end_at_step",
+        "disabled": true
+      },
+      {
+        "node_id": "117:116:106",
+        "input_name_in_node": "return_with_leftover_noise",
+        "disabled": true
+      },
+      {
+        "node_id": "117:116:111",
+        "input_name_in_node": "vae_name",
+        "disabled": true
+      },
+      {
+        "node_id": "117:116:101",
+        "input_name_in_node": "frame_rate",
+        "disabled": true
+      },
+      {
+        "node_id": "117:116:101",
+        "input_name_in_node": "loop_count",
+        "disabled": true
+      },
+      {
+        "node_id": "117:116:101",
+        "input_name_in_node": "filename_prefix",
+        "disabled": true
+      },
+      {
+        "node_id": "117:116:101",
+        "input_name_in_node": "format",
+        "disabled": true
+      },
+      {
+        "node_id": "117:116:102",
+        "input_name_in_node": "megapixel",
+        "disabled": true
+      },
+      {
+        "node_id": "117:116:102",
+        "input_name_in_node": "aspect_ratio",
+        "disabled": true
+      },
+      {
+        "node_id": "117:116:102",
+        "input_name_in_node": "divisible_by",
+        "disabled": true
+      },
+      {
+        "node_id": "117:116:102",
+        "input_name_in_node": "custom_aspect_ratio",
+        "disabled": true
+      },
+      {
+        "node_id": "117:5",
+        "input_name_in_node": "length",
+        "disabled": true
+      },
+      {
+        "node_id": "117:5",
+        "input_name_in_node": "batch_size",
+        "disabled": true
+      }
+    ]
+  }
+}
